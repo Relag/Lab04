@@ -82,7 +82,8 @@ public class Enemy : MonoBehaviour
         Vector3 targetPosition = WaypointManager.Instance.Paths[pathIndex]
             .Waypoint[wayPointIndex].position;
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-        transform.LookAt(targetPosition);
+
+        transform.localRotation = UtilityMethods.SmoothlyLook(transform, targetPosition);
 
         if (Vector3.Distance(transform.position, targetPosition) < .1f)
         {
