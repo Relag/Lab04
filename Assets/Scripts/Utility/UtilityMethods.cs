@@ -50,6 +50,6 @@ public static class UtilityMethods
         Quaternion currentRotation = fromTransform.localRotation;
         Quaternion targetRotation = Quaternion.LookRotation(toVector3 - fromTransform.position);
 
-        return Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * 10f);
+        return Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * 5f);
     }
 }
