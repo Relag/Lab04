@@ -45,8 +45,10 @@ public class Enemy : MonoBehaviour
     {
         EnemyManager.Instance.RegisterEnemy(this);
     }
+
     void OnGotToLastWayPoint()
     {
+        GameManager.Instance.OnEnemyEscape();
         Die();
     }
 
@@ -56,8 +58,14 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
+            DropGold();
             Die();
         }
+    }
+
+    void DropGold()
+    {
+        GameManager.Instance.gold += goldDrop;
     }
 
 
