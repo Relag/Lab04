@@ -16,7 +16,7 @@ public class Tower : MonoBehaviour
     public Enemy targetEnemy = null;
     private float attackCounter;
 
-    private void SmoothhlyLookAtTarget(Vector3 target)
+    private void SmoothlyLookAtTarget(Vector3 target)
     {
         towerPieceToAim.localRotation = UtilityMethods.SmoothlyLook(towerPieceToAim, target);
     }
@@ -59,32 +59,32 @@ public class Tower : MonoBehaviour
     public virtual void Update()
     {
         attackCounter -= Time.deltaTime;
-        
+
         if (targetEnemy == null)
         {
             if (towerPieceToAim)
             {
-                SmoothhlyLookAtTarget(towerPieceToAim.transform.position - new Vector3(0, 0, 1));
+                SmoothlyLookAtTarget(towerPieceToAim.transform.position - new Vector3(0, 0, 1));
             }
-            if (GetNearestEnemyInRange() != null && Vector3.Distance(transform.position, GetNearestEnemyInRange().transform.position) >= aggroRadius)
+            if (GetNearestEnemyInRange() != null && Vector3.Distance(transform.position, GetNearestEnemyInRange().transform.position) <= aggroRadius)
             {
                 targetEnemy = GetNearestEnemyInRange();
             }
-            else
+        }
+        else
+        {
+            if (towerPieceToAim)
             {
-                if (towerPieceToAim)
-                {
-                    SmoothhlyLookAtTarget(targetEnemy.transform.position);
-                }
-                if (attackCounter <= 0f)
-                {
-                    AttackEnemy();
-                    attackCounter = timeBetweenAttacksInSeconds;
-                }
-                if (Vector3.Distance(transform.position, targetEnemy.transform.position) > aggroRadius)
-                {
-                    targetEnemy = null;
-                }
+                SmoothlyLookAtTarget(targetEnemy.transform.position);
+            }
+            if (attackCounter <= 0f)
+            {
+                AttackEnemy();
+                attackCounter = timeBetweenAttacksInSeconds;
+            }
+            if (Vector3.Distance(transform.position, targetEnemy.transform.position) > aggroRadius)
+            {
+                targetEnemy = null;
             }
         }
     }
