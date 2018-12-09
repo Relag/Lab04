@@ -13,14 +13,14 @@ public class TowerManager : MonoBehaviour
         public int cost;
     }
 
-    public TowerManager Instance;
+    public static TowerManager Instance;
     public GameObject stoneTowerPrefab;
     public GameObject fireTowerPrefab;
     public GameObject iceTowerPrefab;
 
     public List<TowerCost> TowerCosts = new List<TowerCost>();
 
-    private void Awake()
+    void Awake()
     {
         Instance = this;
     }
