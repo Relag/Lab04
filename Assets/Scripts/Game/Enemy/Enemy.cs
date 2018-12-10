@@ -75,6 +75,7 @@ public class Enemy : MonoBehaviour
         {
             EnemyManager.Instance.UnRegisterEnemy(this);
             gameObject.AddComponent<AutoScaler>().scaleSpeed = 2;
+            enabled = false;
             Destroy(gameObject, 0.3f);
         }
     }

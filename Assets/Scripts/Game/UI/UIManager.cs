@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour {
     public GameObject loseGameWindow;
     public GameObject blackBackground;
     public GameObject centerWindow;
+    public GameObject damageCanvas;
 
     public Text txtGold;
     public Text txtWave;
@@ -88,6 +89,23 @@ public class UIManager : MonoBehaviour {
 
             yield return new WaitForSeconds(.4f);
             centerWindow.SetActive(false);
+        }
+    }
+
+    public void ShowDamage()
+    {
+        StartCoroutine(DoDamageAnimation());
+    }
+
+    private IEnumerator DoDamageAnimation()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            yield return new WaitForSeconds(.1f);
+            damageCanvas.SetActive(true);
+
+            yield return new WaitForSeconds(.1f);
+            damageCanvas.SetActive(false);
         }
     }
 }

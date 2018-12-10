@@ -51,7 +51,9 @@ public class GameManager : MonoBehaviour
     
     public void OnEnemyEscape()
     {
-        escapedEnemies++;
+        escapedEnemies += 1;
+        UIManager.Instance.ShowDamage();
+
         if (escapedEnemies == maxAllowedEscapedEnemies)
         {
             OnGameLose();
