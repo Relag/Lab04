@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour {
     public GameObject winGameWindow;
     public GameObject loseGameWindow;
     public GameObject blackBackground;
+    public GameObject centerWindow;
 
     public Text txtGold;
     public Text txtWave;
@@ -70,5 +71,23 @@ public class UIManager : MonoBehaviour {
         GameObject healthBar = Instantiate(enemyHealthBarPrefab);
         healthBar.transform.SetParent(enemyHealthBars, false);
         healthBar.GetComponent<EnemyHealthBar>().enemy = enemy;
+    }
+
+    public void ShowCenterWindow(string text)
+    {
+        centerWindow.transform.Find("TxtWave").GetComponent<Text>().text = text;
+        StartCoroutine(EnabledAndDisabledCenterWindow());
+    }
+
+    private IEnumerator EnabledAndDisabledCenterWindow()
+    {
+        for (int i = 0; i < 3; i ++)
+        {
+            yield return new WaitForSeconds(.4f);
+            centerWindow.SetActive(true);
+
+            yield return new WaitForSeconds(.4f);
+            centerWindow.SetActive(false);
+        }
     }
 }
